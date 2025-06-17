@@ -15,6 +15,8 @@ return new class extends Migration
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('12345'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 
