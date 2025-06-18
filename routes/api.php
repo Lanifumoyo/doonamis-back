@@ -1,6 +1,7 @@
 <?php
 
 use Doonamis\Auth\Infrastructure\Http\Controllers\AuthController;
+use Doonamis\User\Infrastructure\Http\Controller\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,10 @@ Route::group([
 ], function () {
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
+    });
+    Route::prefix('users')->group(function () {
+        Route::get('', [UserController::class, 'index'])->middleware('auth:api');
+        Route::delete('{id}', [UserController::class, 'destroy'])->middleware('auth:api');
+        Route::post('upload-from-csv', [UserController::class, 'uploadFromCsv'])->middleware('auth:api');
     });
 });

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('last_name')->after('name')->nullable();
             $table->string('phone')->after('last_name')->nullable();
             $table->string('address')->after('phone')->nullable();
+            $table->dateTime('deleted_at')->after('updated_at')->nullable();
         });
     }
 
