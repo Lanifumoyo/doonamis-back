@@ -4,6 +4,7 @@ namespace Doonamis\Auth\Infrastructure\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Doonamis\Auth\Application\Request\LoginRequest;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,13 +18,11 @@ class AuthController extends Controller
         ];
   
         if (! $token = Auth::attempt($credentials)) {
-            throw new \Exception('Unauthorized',401);
+            throw new AuthenticationException('Credenciales incorrectas');
         }
   
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
 }

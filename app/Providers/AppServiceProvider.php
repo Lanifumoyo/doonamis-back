@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Doonamis\User\Domain\Repository\UserRepository;
+use Doonamis\User\Infrastructure\Repository\EloquentUserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(UserRepository::class, EloquentUserRepository::class);
     }
 
     /**
